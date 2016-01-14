@@ -1,0 +1,1358 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Docker Demos\n",
+    "\n",
+    "Docker demos run within a [Jupyter](http://jupyter.org) notebook\n",
+    "\n",
+    "[Cleanup Demo](#CLEANUP)\n",
+    "[Start   Demo](#START_HERE)\n",
+    "\n",
+    "## Demo setup\n",
+    "\n",
+    "Make sure we can communicate with docker daemon via /var/run/docker.sock mounted as a volume\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "#%alias docker /usr/bin/docker -H unix:///var/run/docker.sock\n",
+    "#%alias docker /usr/bin/docker\n",
+    "#!/usr/bin/docker -H unix:///var/run/docker.sock ps\n",
+    "# Needed chmod 766 /var/run/docker.sock\n",
+    "# Within VM\n",
+    "# !ls -al /var/run/"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "%alias docker docker"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# See if there are any non-jupyter containers running:\n",
+    "%alias docker_ps docker ps -a | grep -v jupyter"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker_ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Show what containers are running:\n",
+    "%docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Stop and Remove any non-jupyter containers if any:\n",
+    "%docker stop $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')\n",
+    "%docker rm $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "!df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Remove unused images:\n",
+    "%docker rmi jupyter/demo mjbright/jupyter_all-notebook \n",
+    "\n",
+    "# Remove used images to reset environment (to be able to show downloading):\n",
+    "%docker rmi alpine; docker rmi hello-world; docker images "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "!df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#docker stop  $(docker ps -ql)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false
+   },
+   "source": [
+    "# CLEANUP\n",
+    "\n",
+    "# Post/Pre-Demo cleanup\n",
+    "\n",
+    "Remove some images (hello-world, alpine)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Stop and Remove any non-jupyter containers if any:\n",
+    "%docker stop $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')\n",
+    "%docker rm $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Remove used images to reset environment (to be able to show downloading):\n",
+    "%docker rmi alpine; docker rmi hello-world; echo; docker images "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#docker search hello-world"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#docker pull hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# START_HERE"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### The docker binary (client / daemon)\n",
+    "\n",
+    "Typing 'docker' will list the available options\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Docker environment (client -> server)\n",
+    "\n",
+    "Let's find some information about our docker environment\n",
+    "\n",
+    "The Docker client needs to connect to a Docker daemon (the Docker engine) which in this case is running\n",
+    "on the same machine.\n",
+    "\n",
+    "By default the client connects using the unix domain socket unix://var/run/docker.sock but we can configure to use a TCP socket, with default 127.0.0.1:2375.\n",
+    "\n",
+    "We can specify the connection to use by setting the DOCKER_HOST environment variable.\n",
+    "\n",
+    "**Note**: we can also specify the docker host on the command line with the '-H' option, e.g. specifying a non-standard port:\n",
+    "\n",
+    "    docker -H 127.0.0.1:2200 version\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Running the 'docker version' command will tell us what client version we are running,\n",
+    "and it will also connect to the docker engine and tell us what version it is running.\n",
+    "\n",
+    "The API version often changes with client/server major version.\n",
+    "\n",
+    "Below we see the software release, API version and OS/architecture for the client and the server.\n",
+    "\n",
+    "So our client/server are compatible"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "docker version"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can also get more information about our Docker engine (the daemon or server)\n",
+    "with the 'docker info' command\n",
+    "\n",
+    "We see the currently number of running containers and the number of image (layers) stored locally\n",
+    "on the engine"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "On my Windows machine I can run a similar command from the command-line to show that we can connect using the Windows docker-machine binary:\n",
+    "\n",
+    "**21:22:50 0 mjbright@MJBRIGHT7 ~> /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 version**\n",
+    "<pre>\n",
+    "Client:\n",
+    " Version:      1.9.1\n",
+    " API version:  1.21\n",
+    " Go version:   go1.4.3\n",
+    " Git commit:   a34a1d5\n",
+    " Built:        Fri Nov 20 17:56:04 UTC 2015\n",
+    " OS/Arch:      windows/amd64\n",
+    "\n",
+    "Server:\n",
+    " Version:      1.9.1\n",
+    " API version:  1.21\n",
+    " Go version:   go1.4.3\n",
+    " Git commit:   a34a1d5\n",
+    " Built:        Fri Nov 20 17:56:04 UTC 2015\n",
+    " OS/Arch:      linux/amd64\n",
+    " </pre>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker info"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### List the currently running processes\n",
+    "\n",
+    "**Note**: This is a list of running container instances, each of which is started from a particular image.\n",
+    "          But we could have multiple containers running from the same image\n",
+    "          (in fact they will have a separate list of additional layers specific to that container instance)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Listing the available images on the local system\n",
+    "\n",
+    "Local images can be\n",
+    "- locally built images\n",
+    "- images pulled from a Docker registry (such as the public [Docker Hub](https://hub.docker.com/))\n",
+    "\n",
+    "Let's list the local images, see below."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "But why don't we see the same number of images as with the 'info' sub-command?\n",
+    "\n",
+    "Let's look at the help for 'images'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help images"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "So we see that we can also list all intermediate images by using the '-a' option.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note: The info command tells us how many image (image-layers) are present but 'docker images' command will list only the\n",
+    "    named layers.  To list all the intermediate layers we will use the '-a' option"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We'll look at those images again later"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker history mjbright/jupyter_demo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Searching for images on [Docker Hub](https://hub.docker.com/).\n",
+    "\n",
+    "Let's search for available 'hello-world' images.\n",
+    "\n",
+    "First let's look to see what options are available to the docker 'search' sub-command"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help search"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's search for hello-world"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There are many 'hello-world' images available, let's see how we can refine our search.\n",
+    "\n",
+    "Let's search for **automated build** images (automatically built from a public **git** source), with at least 10 stars"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search --automated=true hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This has reduced the search.\n",
+    "\n",
+    "But unfortunately there is no flag to select **official** builds, so we have not selected the image we want.\n",
+    "\n",
+    "Let's search for **starred** images (up-voted by [Docker Hub](https://hub.docker.com/) users), with at least 10 stars"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search -s 10 hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This was just an exercise in searching.\n",
+    "\n",
+    "We know that it is the first entry 'hello-world' which is the Docker official 'hello-world' that we're searching for, so we will use that.\n",
+    "\n",
+    "Before downloading that image, let's first look for some more interesting image.\n",
+    "\n",
+    "Any suggestion?\n",
+    "\n",
+    "How about a Ruby-on-Rails image, that's a pretty tough environment to manage, having a Docker image already built would be a fantastic help for a Rails user.\n",
+    "\n",
+    "So let's search for '**rails**'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search rails"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Excellent !\n",
+    "\n",
+    "There's a vast choice of images of different origins\n",
+    "- only 1 official build\n",
+    "- many automated builds (from github sources)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Looking at available images on the public [Docker Hub](https://hub.docker.com/) website\n",
+    "\n",
+    "Let's have a look on the [Docker Hub](https://hub.docker.com/) to learn about those official builds.\n",
+    "\n",
+    "Goto [Search for 'rails' on Docker Hub](https://hub.docker.com/search/?q=rails&page=1&isAutomated=0&isOfficial=0&starCount=0&pullCount=0)\n",
+    "\n",
+    "Let's look at my images on [Docker Hub](https://hub.docker.com/)\n",
+    "\n",
+    "<!-- There we will see .. -->\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Pulling and running an image\n",
+    "\n",
+    "We could just run\n",
+    ">    docker run hello-world\n",
+    "\n",
+    "and the image will be downloaded if not present locally.\n",
+    "\n",
+    "But to show the downloading we will first pull the image\n",
+    "then run it\n",
+    "\n",
+    "So we will **pull** the image and **then** run it\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker pull hello-world"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "So the Docker provided 'hello-world' program simply prints a message.\n",
+    "\n",
+    "We can list the images now on the system, and we see that this image is **really small**, in fact it's\n",
+    "960 bytes.\n",
+    "\n",
+    "Note the other images on the system\n",
+    "- 'alpine' if present is a very small linux system image of about 5MBytes\n",
+    "  It is purposefully small to provide a minimal linux command-line image\n",
+    "- 'several' other images of several GBytes\n",
+    "\n",
+    "This demonstrates that images can contain a whole operating system, whether they are used\n",
+    "to run 1, several or many processes\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can use the 'history' sub-command to look at how this image was 'built'\n",
+    "\n",
+    "We will re-visit this later"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker history hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's run an 'alpine' linux image - we'll just use some shell commands\n",
+    "\n",
+    "Note how if the image is already present, the run is almost instantaneous.\n",
+    "This is because we're basically just launching a process\n",
+    "(albeit over a REST connection, and in a limited namespace/cgroup environment)\n",
+    "\n",
+    "If the image is not present then there's a delay for the image to be downloaded.\n",
+    "For further runs the image is cached."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run alpine echo 'Hello'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that our alpine container is no longer running:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "But the container is still present after it has stopped (unless started with --rm option):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's run a short looping command.\n",
+    "\n",
+    "Note as this demo shell is not completely interactive we need to wait for completion before seeing the output.\n",
+    "This is a characteristic of this notebook, not of Docker.\n",
+    "\n",
+    "**Note**: We would normally run an interactive session with '-it' options\n",
+    "     e.g. docker run -it image command\n",
+    "     "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run -it alpine sh -c 'LOOP=1; while [ $LOOP -le 3 ];do date; sleep 1; let LOOP=LOOP+1; done'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "From a separate shell you can launch a shell in the alpine image with\n",
+    "    docker run -it alpine\n",
+    "which will invoke the default **CMD** which in this case is the **sh** shell"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's run a long lived loop\n",
+    "\n",
+    "Because of this environment we wouldn't see the output until the command is stopped anyway.\n",
+    "So we'll launch the command in daemon mode"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run -d alpine sh -c \"while true;do date; sleep 1; done\""
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": true
+   },
+   "source": [
+    "Note the 'container id' above.\n",
+    "\n",
+    "If we perform docker ps we will see a list of running containers, including this one.\n",
+    "The docker ps will show a shortened, but still unique sha1, for the container"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps --no-trunc"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that unless we specify the '--rm' option to the 'run' sub-command then when a container process(tree) exits\n",
+    "the container will still exist on the system.\n",
+    "\n",
+    "We can list all containers - still running or not - with the\n",
+    "> docker ps -a\n",
+    "command\n",
+    "\n",
+    "try it"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that we can also display the last launched container with the '-l' option\n",
+    "Note that we can also display just the id of containers with the '-q' option"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -q"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -lq"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This can be very useful in the shell (not this shell) to perform some operations,\n",
+    "e.g.\n",
+    "- Stop all running containers:\n",
+    "    > docker stop $(docker ps -q)\n",
+    "\n",
+    "- Stop the last launched running container:\n",
+    "    > docker stop $(docker ps -q)\n",
+    "\n",
+    "- Remove all stopped containers still present:\n",
+    "    > docker rm $(docker ps -qa)\n",
+    "\n",
+    "\n",
+    "### Now let's see how we can interrogate a container (running or stopped)\n",
+    "\n",
+    "Some commands can be performed here, some will have to be run from the shell ...\n",
+    "\n",
+    "Let's run the 'docker inspect' command which will provide us a JSON description of the container\n",
+    "\n",
+    "**NOTE**: You will have to replace the container id below"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker inspect    0fa8b579c3cc                      "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The 'docker logs' command will show us the container output which is stored"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker logs 525330e0d241                \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The 'docker exec' command will show us the container output which is stored\n",
+    "\n",
+    "You can launch a shell within the container (but not from this notebook).\n",
+    "\n",
+    "Try it in a separate shell on the host.\n",
+    "> docker exec &lt;CONTAINER_ID&gt; sh\n",
+    "\n",
+    "Now below let's run uptime within the container (from this notebook)\n",
+    "\n",
+    "Does this uptime correspond to the uptime of the container, or rather the system??"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker exec 525330e0d241 uptime"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Investigate the host system\n",
+    "\n",
+    "In a separate shell on the actual host investigate the host system\n",
+    "- Use pstree to see the docker processes\n",
+    "  - Use 'ps -ef | grep docker' to find the docker daemon pid\n",
+    "  - Look at the sub-processes/threads with\n",
+    "    'pstree -ap <pid>'\n",
+    "  - Watch the sub-processes with\n",
+    "    'watch \"pstree -ap <pid> | grep -v {docker}\"\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker exec 525330e0d241 sleep 20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker history alpine"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false,
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "docker history mjbright/jupyter_demo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "ls -altr Dockerfile*"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "cat Dockerfile.mjbright-jupyter_demo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker info"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Looking at automated builds on the public [Docker Hub](https://hub.docker.com/) website\n",
+    "\n",
+    "\n",
+    "Let's look at one of my own automated ['jupyter/demo' image on Docker Hub](https://hub.docker.com/r/mjbright/jupyter_demo/)\n",
+    "\n",
+    "There we will see\n",
+    "- Repo Info:     We see the 'docker pull' command to use to pull the image\n",
+    "- Tags\n",
+    "- Description:   If any ;-)\n",
+    "- Dockerfile:    Look at the Dockerfile which was provided from git (github or bitbucket)\n",
+    "  - We see that this image is derived **FROM** an existing jupyter/minimal-notebook image\n",
+    "  - Note the '**Source Project**' button on the right-hand side which links to the git source\n",
+    "- Build Details: We see a list of builds, we can look at the detail of each one\n",
+    "- Build Settings\n",
+    "- Collaborators\n",
+    "- WebHooks:      This image will be rebuilt when the git source changes,\n",
+    "                 but we can also specify existing images upon which we depend, which\n",
+    "                 should trigger a build\n",
+    "\n",
+    "All this adds up to **FREE builds** for open sourced git projects !!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Docker networking"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help network"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker network ls"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a --no-trunc"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker network inspect bridge"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "docker help attach"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "docker help diff"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker diff cdbde0b863f6        "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help commit"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help create"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Volumes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help volume"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker volume ls"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.4.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}

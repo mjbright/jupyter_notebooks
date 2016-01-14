@@ -1,0 +1,1858 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Docker Demos\n",
+    "\n",
+    "Docker demos run within a [Jupyter](http://jupyter.org) notebook\n",
+    "\n",
+    "[Cleanup Demo](#CLEANUP)\n",
+    "[Start   Demo](#START_HERE)\n",
+    "\n",
+    "## Demo setup\n",
+    "\n",
+    "Make sure we can communicate with docker daemon via /var/run/docker.sock mounted as a volume\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "#%alias docker /usr/bin/docker -H unix:///var/run/docker.sock\n",
+    "#%alias docker /usr/bin/docker\n",
+    "#!/usr/bin/docker -H unix:///var/run/docker.sock ps\n",
+    "# Needed chmod 766 /var/run/docker.sock\n",
+    "# Within VM\n",
+    "# !ls -al /var/run/"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "%alias docker docker"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# See if there are any non-jupyter containers running:\n",
+    "%alias docker_ps docker ps -a | grep -v jupyter"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker_ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Show what containers are running:\n",
+    "%docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Stop and Remove any non-jupyter containers if any:\n",
+    "%docker stop $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')\n",
+    "%docker rm $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "!df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Remove unused images:\n",
+    "%docker rmi jupyter/demo mjbright/jupyter_all-notebook \n",
+    "\n",
+    "# Remove used images to reset environment (to be able to show downloading):\n",
+    "%docker rmi alpine; docker rmi hello-world; docker images "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "!df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#docker stop  $(docker ps -ql)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false
+   },
+   "source": [
+    "# CLEANUP\n",
+    "\n",
+    "# Post/Pre-Demo cleanup\n",
+    "\n",
+    "Remove some images (hello-world, alpine)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Stop and Remove any non-jupyter containers if any:\n",
+    "%docker stop $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')\n",
+    "%docker rm $(docker ps -a | grep -vE \"CONTAINER|jupyter\" | awk '{ print $1; }')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "# Remove used images to reset environment (to be able to show downloading):\n",
+    "%docker rmi alpine; docker rmi hello-world; echo; docker images "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#docker search hello-world"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#docker pull hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# START_HERE"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### The docker binary (client / daemon)\n",
+    "\n",
+    "Typing 'docker' will list the available options\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 221,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Usage: docker [OPTIONS] COMMAND [arg...]\r\n",
+      "       docker daemon [ --help | ... ]\r\n",
+      "       docker [ --help | -v | --version ]\r\n",
+      "\r\n",
+      "A self-sufficient runtime for containers.\r\n",
+      "\r\n",
+      "Options:\r\n",
+      "\r\n",
+      "  --config=~/.docker                 Location of client config files\r\n",
+      "  -D, --debug=false                  Enable debug mode\r\n",
+      "  --disable-legacy-registry=false    Do not contact legacy registries\r\n",
+      "  -H, --host=[]                      Daemon socket(s) to connect to\r\n",
+      "  -h, --help=false                   Print usage\r\n",
+      "  -l, --log-level=info               Set the logging level\r\n",
+      "  --tls=false                        Use TLS; implied by --tlsverify\r\n",
+      "  --tlscacert=~/.docker/ca.pem       Trust certs signed only by this CA\r\n",
+      "  --tlscert=~/.docker/cert.pem       Path to TLS certificate file\r\n",
+      "  --tlskey=~/.docker/key.pem         Path to TLS key file\r\n",
+      "  --tlsverify=false                  Use TLS and verify the remote\r\n",
+      "  -v, --version=false                Print version information and quit\r\n",
+      "\r\n",
+      "Commands:\r\n",
+      "    attach    Attach to a running container\r\n",
+      "    build     Build an image from a Dockerfile\r\n",
+      "    commit    Create a new image from a container's changes\r\n",
+      "    cp        Copy files/folders between a container and the local filesystem\r\n",
+      "    create    Create a new container\r\n",
+      "    diff      Inspect changes on a container's filesystem\r\n",
+      "    events    Get real time events from the server\r\n",
+      "    exec      Run a command in a running container\r\n",
+      "    export    Export a container's filesystem as a tar archive\r\n",
+      "    history   Show the history of an image\r\n",
+      "    images    List images\r\n",
+      "    import    Import the contents from a tarball to create a filesystem image\r\n",
+      "    info      Display system-wide information\r\n",
+      "    inspect   Return low-level information on a container or image\r\n",
+      "    kill      Kill a running container\r\n",
+      "    load      Load an image from a tar archive or STDIN\r\n",
+      "    login     Register or log in to a Docker registry\r\n",
+      "    logout    Log out from a Docker registry\r\n",
+      "    logs      Fetch the logs of a container\r\n",
+      "    network   Manage Docker networks\r\n",
+      "    pause     Pause all processes within a container\r\n",
+      "    port      List port mappings or a specific mapping for the CONTAINER\r\n",
+      "    ps        List containers\r\n",
+      "    pull      Pull an image or a repository from a registry\r\n",
+      "    push      Push an image or a repository to a registry\r\n",
+      "    rename    Rename a container\r\n",
+      "    restart   Restart a container\r\n",
+      "    rm        Remove one or more containers\r\n",
+      "    rmi       Remove one or more images\r\n",
+      "    run       Run a command in a new container\r\n",
+      "    save      Save an image(s) to a tar archive\r\n",
+      "    search    Search the Docker Hub for images\r\n",
+      "    start     Start one or more stopped containers\r\n",
+      "    stats     Display a live stream of container(s) resource usage statistics\r\n",
+      "    stop      Stop a running container\r\n",
+      "    tag       Tag an image into a repository\r\n",
+      "    top       Display the running processes of a container\r\n",
+      "    unpause   Unpause all processes within a container\r\n",
+      "    version   Show the Docker version information\r\n",
+      "    volume    Manage Docker volumes\r\n",
+      "    wait      Block until a container stops, then print its exit code\r\n",
+      "\r\n",
+      "Run 'docker COMMAND --help' for more information on a command.\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Docker environment (client -> server)\n",
+    "\n",
+    "Let's find some information about our docker environment\n",
+    "\n",
+    "The Docker client needs to connect to a Docker daemon (the Docker engine) which in this case is running\n",
+    "on the same machine.\n",
+    "\n",
+    "By default the client connects using the unix domain socket unix://var/run/docker.sock but we can configure to use a TCP socket, with default 127.0.0.1:2375.\n",
+    "\n",
+    "We can specify the connection to use by setting the DOCKER_HOST environment variable.\n",
+    "\n",
+    "**Note**: we can also specify the docker host on the command line with the '-H' option, e.g. specifying a non-standard port:\n",
+    "\n",
+    "    docker -H 127.0.0.1:2200 version\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Running the 'docker version' command will tell us what client version we are running,\n",
+    "and it will also connect to the docker engine and tell us what version it is running.\n",
+    "\n",
+    "The API version often changes with client/server major version.\n",
+    "\n",
+    "Below we see the software release, API version and OS/architecture for the client and the server.\n",
+    "\n",
+    "So our client/server are compatible"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "docker version"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can also get more information about our Docker engine (the daemon or server)\n",
+    "with the 'docker info' command\n",
+    "\n",
+    "We see the currently number of running containers and the number of image (layers) stored locally\n",
+    "on the engine"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "On my Windows machine I can run a similar command from the command-line to show that we can connect using the Windows docker-machine binary:\n",
+    "\n",
+    "**21:22:50 0 mjbright@MJBRIGHT7 ~> /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 version**\n",
+    "<pre>\n",
+    "Client:\n",
+    " Version:      1.9.1\n",
+    " API version:  1.21\n",
+    " Go version:   go1.4.3\n",
+    " Git commit:   a34a1d5\n",
+    " Built:        Fri Nov 20 17:56:04 UTC 2015\n",
+    " OS/Arch:      windows/amd64\n",
+    "\n",
+    "Server:\n",
+    " Version:      1.9.1\n",
+    " API version:  1.21\n",
+    " Go version:   go1.4.3\n",
+    " Git commit:   a34a1d5\n",
+    " Built:        Fri Nov 20 17:56:04 UTC 2015\n",
+    " OS/Arch:      linux/amd64\n",
+    " </pre>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker info"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### List the currently running processes\n",
+    "\n",
+    "**Note**: This is a list of running container instances, each of which is started from a particular image.\n",
+    "          But we could have multiple containers running from the same image\n",
+    "          (in fact they will have a separate list of additional layers specific to that container instance)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Listing the available images on the local system\n",
+    "\n",
+    "Local images can be\n",
+    "- locally built images\n",
+    "- images pulled from a Docker registry (such as the public [Docker Hub](https://hub.docker.com/))\n",
+    "\n",
+    "Let's list the local images, see below."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "But why don't we see the same number of images as with the 'info' sub-command?\n",
+    "\n",
+    "Let's look at the help for 'images'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help images"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "So we see that we can also list all intermediate images by using the '-a' option.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note: The info command tells us how many image (image-layers) are present but 'docker images' command will list only the\n",
+    "    named layers.  To list all the intermediate layers we will use the '-a' option"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We'll look at those images again later"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker history mjbright/jupyter_demo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Searching for images on [Docker Hub](https://hub.docker.com/).\n",
+    "\n",
+    "Let's search for available 'hello-world' images.\n",
+    "\n",
+    "First let's look to see what options are available to the docker 'search' sub-command"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help search"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's search for hello-world"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There are many 'hello-world' images available, let's see how we can refine our search.\n",
+    "\n",
+    "Let's search for **automated build** images (automatically built from a public **git** source), with at least 10 stars"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search --automated=true hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This has reduced the search.\n",
+    "\n",
+    "But unfortunately there is no flag to select **official** builds, so we have not selected the image we want.\n",
+    "\n",
+    "Let's search for **starred** images (up-voted by [Docker Hub](https://hub.docker.com/) users), with at least 10 stars"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search -s 10 hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This was just an exercise in searching.\n",
+    "\n",
+    "We know that it is the first entry 'hello-world' which is the Docker official 'hello-world' that we're searching for, so we will use that.\n",
+    "\n",
+    "Before downloading that image, let's first look for some more interesting image.\n",
+    "\n",
+    "Any suggestion?\n",
+    "\n",
+    "How about a Ruby-on-Rails image, that's a pretty tough environment to manage, having a Docker image already built would be a fantastic help for a Rails user.\n",
+    "\n",
+    "So let's search for '**rails**'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker search rails"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Excellent !\n",
+    "\n",
+    "There's a vast choice of images of different origins\n",
+    "- only 1 official build\n",
+    "- many automated builds (from github sources)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Looking at available images on the public [Docker Hub](https://hub.docker.com/) website\n",
+    "\n",
+    "Let's have a look on the [Docker Hub](https://hub.docker.com/) to learn about those official builds.\n",
+    "\n",
+    "Goto [Search for 'rails' on Docker Hub](https://hub.docker.com/search/?q=rails&page=1&isAutomated=0&isOfficial=0&starCount=0&pullCount=0)\n",
+    "\n",
+    "Let's look at my images on [Docker Hub](https://hub.docker.com/)\n",
+    "\n",
+    "<!-- There we will see .. -->\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Pulling and running an image\n",
+    "\n",
+    "We could just run\n",
+    ">    docker run hello-world\n",
+    "\n",
+    "and the image will be downloaded if not present locally.\n",
+    "\n",
+    "But to show the downloading we will first pull the image\n",
+    "then run it\n",
+    "\n",
+    "So we will **pull** the image and **then** run it\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker pull hello-world"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "So the Docker provided 'hello-world' program simply prints a message.\n",
+    "\n",
+    "We can list the images now on the system, and we see that this image is **really small**, in fact it's\n",
+    "960 bytes.\n",
+    "\n",
+    "Note the other images on the system\n",
+    "- 'alpine' if present is a very small linux system image of about 5MBytes\n",
+    "  It is purposefully small to provide a minimal linux command-line image\n",
+    "- 'several' other images of several GBytes\n",
+    "\n",
+    "This demonstrates that images can contain a whole operating system, whether they are used\n",
+    "to run 1, several or many processes\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can use the 'history' sub-command to look at how this image was 'built'\n",
+    "\n",
+    "We will re-visit this later"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker history hello-world"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's run an 'alpine' linux image - we'll just use some shell commands\n",
+    "\n",
+    "Note how if the image is already present, the run is almost instantaneous.\n",
+    "This is because we're basically just launching a process\n",
+    "(albeit over a REST connection, and in a limited namespace/cgroup environment)\n",
+    "\n",
+    "If the image is not present then there's a delay for the image to be downloaded.\n",
+    "For further runs the image is cached."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run alpine echo 'Hello'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that our alpine container is no longer running:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "But the container is still present after it has stopped (unless started with --rm option):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's run a short looping command.\n",
+    "\n",
+    "Note as this demo shell is not completely interactive we need to wait for completion before seeing the output.\n",
+    "This is a characteristic of this notebook, not of Docker.\n",
+    "\n",
+    "**Note**: We would normally run an interactive session with '-it' options\n",
+    "     e.g. docker run -it image command\n",
+    "     "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run -it alpine sh -c 'LOOP=1; while [ $LOOP -le 3 ];do date; sleep 1; let LOOP=LOOP+1; done'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "From a separate shell you can launch a shell in the alpine image with\n",
+    "    docker run -it alpine\n",
+    "which will invoke the default **CMD** which in this case is the **sh** shell"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's run a long lived loop\n",
+    "\n",
+    "Because of this environment we wouldn't see the output until the command is stopped anyway.\n",
+    "So we'll launch the command in daemon mode"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker run -d alpine sh -c \"while true;do date; sleep 1; done\""
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": true
+   },
+   "source": [
+    "Note the 'container id' above.\n",
+    "\n",
+    "If we perform docker ps we will see a list of running containers, including this one.\n",
+    "The docker ps will show a shortened, but still unique sha1, for the container"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker help ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps --no-trunc"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that unless we specify the '--rm' option to the 'run' sub-command then when a container process(tree) exits\n",
+    "the container will still exist on the system.\n",
+    "\n",
+    "We can list all containers - still running or not - with the\n",
+    "> docker ps -a\n",
+    "command\n",
+    "\n",
+    "try it"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Note that we can also display the last launched container with the '-l' option\n",
+    "Note that we can also display just the id of containers with the '-q' option"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -q"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -lq"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This can be very useful in the shell (not this shell) to perform some operations,\n",
+    "e.g.\n",
+    "- Stop all running containers:\n",
+    "    > docker stop $(docker ps -q)\n",
+    "\n",
+    "- Stop the last launched running container:\n",
+    "    > docker stop $(docker ps -q)\n",
+    "\n",
+    "- Remove all stopped containers still present:\n",
+    "    > docker rm $(docker ps -qa)\n",
+    "\n",
+    "\n",
+    "### Now let's see how we can interrogate a container (running or stopped)\n",
+    "\n",
+    "Some commands can be performed here, some will have to be run from the shell ...\n",
+    "\n",
+    "Let's run the 'docker inspect' command which will provide us a JSON description of the container\n",
+    "\n",
+    "**NOTE**: You will have to replace the container id below"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker inspect    0fa8b579c3cc                      "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The 'docker logs' command will show us the container output which is stored"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker logs 525330e0d241                \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The 'docker exec' command will show us the container output which is stored\n",
+    "\n",
+    "You can launch a shell within the container (but not from this notebook).\n",
+    "\n",
+    "Try it in a separate shell on the host.\n",
+    "> docker exec &lt;CONTAINER_ID&gt; sh\n",
+    "\n",
+    "Now below let's run uptime within the container (from this notebook)\n",
+    "\n",
+    "Does this uptime correspond to the uptime of the container, or rather the system??"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker exec 525330e0d241 uptime"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Investigate the host system\n",
+    "\n",
+    "In a separate shell on the actual host investigate the host system\n",
+    "- Use pstree to see the docker processes\n",
+    "  - Use 'ps -ef | grep docker' to find the docker daemon pid\n",
+    "  - Look at the sub-processes/threads with\n",
+    "    'pstree -ap <pid>'\n",
+    "  - Watch the sub-processes with\n",
+    "    'watch \"pstree -ap <pid> | grep -v {docker}\"\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker exec 525330e0d241 sleep 20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker images"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker history alpine"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false,
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "docker history mjbright/jupyter_demo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "ls -altr Dockerfile*"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "cat Dockerfile.mjbright-jupyter_demo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker info"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "docker ps -a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Looking at automated builds on the public [Docker Hub](https://hub.docker.com/) website\n",
+    "\n",
+    "\n",
+    "Let's look at one of my own automated ['jupyter/demo' image on Docker Hub](https://hub.docker.com/r/mjbright/jupyter_demo/)\n",
+    "\n",
+    "There we will see\n",
+    "- Repo Info:     We see the 'docker pull' command to use to pull the image\n",
+    "- Tags\n",
+    "- Description:   If any ;-)\n",
+    "- Dockerfile:    Look at the Dockerfile which was provided from git (github or bitbucket)\n",
+    "  - We see that this image is derived **FROM** an existing jupyter/minimal-notebook image\n",
+    "  - Note the '**Source Project**' button on the right-hand side which links to the git source\n",
+    "- Build Details: We see a list of builds, we can look at the detail of each one\n",
+    "- Build Settings\n",
+    "- Collaborators\n",
+    "- WebHooks:      This image will be rebuilt when the git source changes,\n",
+    "                 but we can also specify existing images upon which we depend, which\n",
+    "                 should trigger a build\n",
+    "\n",
+    "All this adds up to **FREE builds** for open sourced git projects !!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Docker networking"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 228,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\r\n",
+      "Usage:\tdocker network [OPTIONS] COMMAND [OPTIONS]\r\n",
+      "\r\n",
+      "Commands:\r\n",
+      "  rm                       Remove a network\r\n",
+      "  create                   Create a network\r\n",
+      "  connect                  Connect container to a network\r\n",
+      "  disconnect               Disconnect container from a network\r\n",
+      "  inspect                  Display detailed network information\r\n",
+      "  ls                       List all networks\r\n",
+      "\r\n",
+      "Run 'docker network COMMAND --help' for more information on a command.\r\n",
+      "\r\n",
+      "  --help=false       Print usage\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker help network"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 229,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "NETWORK ID          NAME                DRIVER\r\n",
+      "1d07524cd717        host                host                \r\n",
+      "c606eb6734f2        bridge              bridge              \r\n",
+      "61b65553de09        none                null                \r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker network ls"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 243,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "CONTAINER ID                                                       IMAGE                   COMMAND                               CREATED             STATUS              PORTS                    NAMES\r\n",
+      "cdbde0b863f6f80a2f57c55ed541f81ca59129363935ca484f343c404f68b074   mjbright/jupyter_demo   \"tini -- start-notebook.sh --debug\"   3 hours ago         Up 3 hours          0.0.0.0:8878->8888/tcp   silly_saha\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker ps -a --no-trunc"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 233,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[\r\n",
+      "    {\r\n",
+      "        \"Name\": \"bridge\",\r\n",
+      "        \"Id\": \"c606eb6734f24c6cd577f04045a8ae50ec881b50a02778dafa5362acc48a7eb3\",\r\n",
+      "        \"Scope\": \"local\",\r\n",
+      "        \"Driver\": \"bridge\",\r\n",
+      "        \"IPAM\": {\r\n",
+      "            \"Driver\": \"default\",\r\n",
+      "            \"Config\": [\r\n",
+      "                {\r\n",
+      "                    \"Subnet\": \"172.17.42.1/16\",\r\n",
+      "                    \"Gateway\": \"172.17.42.1\"\r\n",
+      "                }\r\n",
+      "            ]\r\n",
+      "        },\r\n",
+      "        \"Containers\": {\r\n",
+      "            \"cdbde0b863f6f80a2f57c55ed541f81ca59129363935ca484f343c404f68b074\": {\r\n",
+      "                \"EndpointID\": \"6eafd7c399a473bf0ffd89773797bb4e78549a7f741506ecd3f79975125a9bfb\",\r\n",
+      "                \"MacAddress\": \"02:42:ac:11:00:01\",\r\n",
+      "                \"IPv4Address\": \"172.17.0.1/16\",\r\n",
+      "                \"IPv6Address\": \"\"\r\n",
+      "            }\r\n",
+      "        },\r\n",
+      "        \"Options\": {\r\n",
+      "            \"com.docker.network.bridge.default_bridge\": \"true\",\r\n",
+      "            \"com.docker.network.bridge.enable_icc\": \"true\",\r\n",
+      "            \"com.docker.network.bridge.enable_ip_masquerade\": \"true\",\r\n",
+      "            \"com.docker.network.bridge.host_binding_ipv4\": \"0.0.0.0\",\r\n",
+      "            \"com.docker.network.bridge.name\": \"docker0\",\r\n",
+      "            \"com.docker.network.driver.mtu\": \"1500\"\r\n",
+      "        }\r\n",
+      "    }\r\n",
+      "]\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker network inspect bridge"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 238,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Usage: docker [OPTIONS] COMMAND [arg...]\r\n",
+      "       docker daemon [ --help | ... ]\r\n",
+      "       docker [ --help | -v | --version ]\r\n",
+      "\r\n",
+      "A self-sufficient runtime for containers.\r\n",
+      "\r\n",
+      "Options:\r\n",
+      "\r\n",
+      "  --config=~/.docker                 Location of client config files\r\n",
+      "  -D, --debug=false                  Enable debug mode\r\n",
+      "  --disable-legacy-registry=false    Do not contact legacy registries\r\n",
+      "  -H, --host=[]                      Daemon socket(s) to connect to\r\n",
+      "  -h, --help=false                   Print usage\r\n",
+      "  -l, --log-level=info               Set the logging level\r\n",
+      "  --tls=false                        Use TLS; implied by --tlsverify\r\n",
+      "  --tlscacert=~/.docker/ca.pem       Trust certs signed only by this CA\r\n",
+      "  --tlscert=~/.docker/cert.pem       Path to TLS certificate file\r\n",
+      "  --tlskey=~/.docker/key.pem         Path to TLS key file\r\n",
+      "  --tlsverify=false                  Use TLS and verify the remote\r\n",
+      "  -v, --version=false                Print version information and quit\r\n",
+      "\r\n",
+      "Commands:\r\n",
+      "    attach    Attach to a running container\r\n",
+      "    build     Build an image from a Dockerfile\r\n",
+      "    commit    Create a new image from a container's changes\r\n",
+      "    cp        Copy files/folders between a container and the local filesystem\r\n",
+      "    create    Create a new container\r\n",
+      "    diff      Inspect changes on a container's filesystem\r\n",
+      "    events    Get real time events from the server\r\n",
+      "    exec      Run a command in a running container\r\n",
+      "    export    Export a container's filesystem as a tar archive\r\n",
+      "    history   Show the history of an image\r\n",
+      "    images    List images\r\n",
+      "    import    Import the contents from a tarball to create a filesystem image\r\n",
+      "    info      Display system-wide information\r\n",
+      "    inspect   Return low-level information on a container or image\r\n",
+      "    kill      Kill a running container\r\n",
+      "    load      Load an image from a tar archive or STDIN\r\n",
+      "    login     Register or log in to a Docker registry\r\n",
+      "    logout    Log out from a Docker registry\r\n",
+      "    logs      Fetch the logs of a container\r\n",
+      "    network   Manage Docker networks\r\n",
+      "    pause     Pause all processes within a container\r\n",
+      "    port      List port mappings or a specific mapping for the CONTAINER\r\n",
+      "    ps        List containers\r\n",
+      "    pull      Pull an image or a repository from a registry\r\n",
+      "    push      Push an image or a repository to a registry\r\n",
+      "    rename    Rename a container\r\n",
+      "    restart   Restart a container\r\n",
+      "    rm        Remove one or more containers\r\n",
+      "    rmi       Remove one or more images\r\n",
+      "    run       Run a command in a new container\r\n",
+      "    save      Save an image(s) to a tar archive\r\n",
+      "    search    Search the Docker Hub for images\r\n",
+      "    start     Start one or more stopped containers\r\n",
+      "    stats     Display a live stream of container(s) resource usage statistics\r\n",
+      "    stop      Stop a running container\r\n",
+      "    tag       Tag an image into a repository\r\n",
+      "    top       Display the running processes of a container\r\n",
+      "    unpause   Unpause all processes within a container\r\n",
+      "    version   Show the Docker version information\r\n",
+      "    volume    Manage Docker volumes\r\n",
+      "    wait      Block until a container stops, then print its exit code\r\n",
+      "\r\n",
+      "Run 'docker COMMAND --help' for more information on a command.\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker help"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "docker help attach"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "docker help diff"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 250,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                    NAMES\r\n",
+      "cdbde0b863f6        mjbright/jupyter_demo   \"tini -- start-notebo\"   4 hours ago         Up 4 hours          0.0.0.0:8878->8888/tcp   silly_saha\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker ps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 251,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "C /home\r\n",
+      "C /home/jovyan\r\n",
+      "C /home/jovyan/.ipython\r\n",
+      "A /home/jovyan/.ipython/extensions\r\n",
+      "A /home/jovyan/.ipython/nbextensions\r\n",
+      "A /home/jovyan/.ipython/profile_default\r\n",
+      "A /home/jovyan/.ipython/profile_default/db\r\n",
+      "A /home/jovyan/.ipython/profile_default/history.sqlite\r\n",
+      "A /home/jovyan/.ipython/profile_default/log\r\n",
+      "A /home/jovyan/.ipython/profile_default/pid\r\n",
+      "A /home/jovyan/.ipython/profile_default/security\r\n",
+      "A /home/jovyan/.ipython/profile_default/startup\r\n",
+      "A /home/jovyan/.ipython/profile_default/startup/README\r\n",
+      "C /home/jovyan/.local\r\n",
+      "C /home/jovyan/.local/lib\r\n",
+      "C /home/jovyan/.local/lib/python3.4\r\n",
+      "C /home/jovyan/.local/lib/python3.4/site-packages\r\n",
+      "C /home/jovyan/.local/lib/python3.4/site-packages/nbgrader\r\n",
+      "C /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/__pycache__\r\n",
+      "A /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/__pycache__/__main__.cpython-34.pyc\r\n",
+      "C /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/nbextensions\r\n",
+      "A /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/nbextensions/__pycache__\r\n",
+      "A /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/nbextensions/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/nbextensions/assignment_list\r\n",
+      "A /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/nbextensions/assignment_list/__pycache__\r\n",
+      "A /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/nbextensions/assignment_list/__pycache__/__init__.cpython-34.pyc\r\n",
+      "A /home/jovyan/.local/lib/python3.4/site-packages/nbgrader/nbextensions/assignment_list/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /home/jovyan/.local/share\r\n",
+      "C /home/jovyan/.local/share/jupyter\r\n",
+      "C /home/jovyan/.local/share/jupyter/nbsignatures.db\r\n",
+      "A /home/jovyan/.local/share/jupyter/runtime\r\n",
+      "A /home/jovyan/.local/share/jupyter/runtime/kernel-d98b0e61-7d05-4534-9558-ade8eb3d248e.json\r\n",
+      "A /home/jovyan/.local/share/jupyter/runtime/nbserver-9.json\r\n",
+      "A /home/jovyan/.local/share/jupyter/runtime/notebook_cookie_secret\r\n",
+      "C /opt\r\n",
+      "C /opt/conda\r\n",
+      "C /opt/conda/lib\r\n",
+      "C /opt/conda/lib/python3.4\r\n",
+      "C /opt/conda/lib/python3.4/site-packages\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/__main__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/codeutil.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/datapub.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/displayhook.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/heartbeat.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/iostream.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/ipkernel.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/kernelapp.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/kernelspec.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/parentpoller.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/pickleutil.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/serialize.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipykernel/__pycache__/zmqshell.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/__pycache__/_version.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/eventful.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/interaction.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/trait_types.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_bool.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_box.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_button.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_color.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_controller.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_float.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_image.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_int.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_link.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_output.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_selection.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_selectioncontainer.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/ipywidgets/widgets/__pycache__/widget_string.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/base\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/base/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/base/__pycache__/zmqhandlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/edit\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/edit/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/edit/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/edit/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/files\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/files/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/files/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/files/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/kernelspecs\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/kernelspecs/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/kernelspecs/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/kernelspecs/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/nbconvert\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/nbconvert/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/nbconvert/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/nbconvert/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/notebook\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/notebook/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/notebook/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/notebook/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/api\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/api/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/api/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/api/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/config\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/config/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/config/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/contents\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/contents/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/contents/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/kernels\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/kernels/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/kernels/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/kernelspecs\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/kernelspecs/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/kernelspecs/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/kernelspecs/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/nbconvert\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/nbconvert/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/nbconvert/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/nbconvert/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/security\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/security/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/security/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/sessions\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/sessions/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/services/sessions/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/terminal\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/terminal/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/terminal/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/terminal/__pycache__/api_handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/terminal/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/tree\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/tree/__pycache__\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/tree/__pycache__/__init__.cpython-34.pyc\r\n",
+      "C /opt/conda/lib/python3.4/site-packages/notebook/tree/__pycache__/handlers.cpython-34.pyc\r\n",
+      "C /run\r\n",
+      "A /run/docker.sock\r\n",
+      "C /usr\r\n",
+      "C /usr/bin\r\n",
+      "A /usr/bin/docker\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker diff cdbde0b863f6        "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 245,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\r\n",
+      "Usage:\tdocker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]\r\n",
+      "\r\n",
+      "Create a new image from a container's changes\r\n",
+      "\r\n",
+      "  -a, --author=       Author (e.g., \"John Hannibal Smith <hannibal@a-team.com>\")\r\n",
+      "  -c, --change=[]     Apply Dockerfile instruction to the created image\r\n",
+      "  --help=false        Print usage\r\n",
+      "  -m, --message=      Commit message\r\n",
+      "  -p, --pause=true    Pause container during commit\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker help commit"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 239,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\r\n",
+      "Usage:\tdocker create [OPTIONS] IMAGE [COMMAND] [ARG...]\r\n",
+      "\r\n",
+      "Create a new container\r\n",
+      "\r\n",
+      "  -a, --attach=[]                 Attach to STDIN, STDOUT or STDERR\r\n",
+      "  --add-host=[]                   Add a custom host-to-IP mapping (host:ip)\r\n",
+      "  --blkio-weight=0                Block IO (relative weight), between 10 and 1000\r\n",
+      "  --cpu-shares=0                  CPU shares (relative weight)\r\n",
+      "  --cap-add=[]                    Add Linux capabilities\r\n",
+      "  --cap-drop=[]                   Drop Linux capabilities\r\n",
+      "  --cgroup-parent=                Optional parent cgroup for the container\r\n",
+      "  --cidfile=                      Write the container ID to the file\r\n",
+      "  --cpu-period=0                  Limit CPU CFS (Completely Fair Scheduler) period\r\n",
+      "  --cpu-quota=0                   Limit CPU CFS (Completely Fair Scheduler) quota\r\n",
+      "  --cpuset-cpus=                  CPUs in which to allow execution (0-3, 0,1)\r\n",
+      "  --cpuset-mems=                  MEMs in which to allow execution (0-3, 0,1)\r\n",
+      "  --device=[]                     Add a host device to the container\r\n",
+      "  --disable-content-trust=true    Skip image verification\r\n",
+      "  --dns=[]                        Set custom DNS servers\r\n",
+      "  --dns-opt=[]                    Set DNS options\r\n",
+      "  --dns-search=[]                 Set custom DNS search domains\r\n",
+      "  -e, --env=[]                    Set environment variables\r\n",
+      "  --entrypoint=                   Overwrite the default ENTRYPOINT of the image\r\n",
+      "  --env-file=[]                   Read in a file of environment variables\r\n",
+      "  --expose=[]                     Expose a port or a range of ports\r\n",
+      "  --group-add=[]                  Add additional groups to join\r\n",
+      "  -h, --hostname=                 Container host name\r\n",
+      "  --help=false                    Print usage\r\n",
+      "  -i, --interactive=false         Keep STDIN open even if not attached\r\n",
+      "  --ipc=                          IPC namespace to use\r\n",
+      "  --kernel-memory=                Kernel memory limit\r\n",
+      "  -l, --label=[]                  Set meta data on a container\r\n",
+      "  --label-file=[]                 Read in a line delimited file of labels\r\n",
+      "  --link=[]                       Add link to another container\r\n",
+      "  --log-driver=                   Logging driver for container\r\n",
+      "  --log-opt=[]                    Log driver options\r\n",
+      "  --lxc-conf=[]                   Add custom lxc options\r\n",
+      "  -m, --memory=                   Memory limit\r\n",
+      "  --mac-address=                  Container MAC address (e.g. 92:d0:c6:0a:29:33)\r\n",
+      "  --memory-reservation=           Memory soft limit\r\n",
+      "  --memory-swap=                  Total memory (memory + swap), '-1' to disable swap\r\n",
+      "  --memory-swappiness=-1          Tuning container memory swappiness (0 to 100)\r\n",
+      "  --name=                         Assign a name to the container\r\n",
+      "  --net=default                   Set the Network for the container\r\n",
+      "  --oom-kill-disable=false        Disable OOM Killer\r\n",
+      "  -P, --publish-all=false         Publish all exposed ports to random ports\r\n",
+      "  -p, --publish=[]                Publish a container's port(s) to the host\r\n",
+      "  --pid=                          PID namespace to use\r\n",
+      "  --privileged=false              Give extended privileges to this container\r\n",
+      "  --read-only=false               Mount the container's root filesystem as read only\r\n",
+      "  --restart=no                    Restart policy to apply when a container exits\r\n",
+      "  --security-opt=[]               Security Options\r\n",
+      "  --stop-signal=SIGTERM           Signal to stop a container, SIGTERM by default\r\n",
+      "  -t, --tty=false                 Allocate a pseudo-TTY\r\n",
+      "  -u, --user=                     Username or UID (format: <name|uid>[:<group|gid>])\r\n",
+      "  --ulimit=[]                     Ulimit options\r\n",
+      "  --uts=                          UTS namespace to use\r\n",
+      "  -v, --volume=[]                 Bind mount a volume\r\n",
+      "  --volume-driver=                Optional volume driver for the container\r\n",
+      "  --volumes-from=[]               Mount volumes from the specified container(s)\r\n",
+      "  -w, --workdir=                  Working directory inside the container\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker help create"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Volumes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 236,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\r\n",
+      "Usage:\tdocker volume [OPTIONS] [COMMAND]\r\n",
+      "\r\n",
+      "Manage Docker volumes\r\n",
+      "\r\n",
+      "Commands:\r\n",
+      "  create                   Create a volume\r\n",
+      "  inspect                  Return low-level information on a volume\r\n",
+      "  ls                       List volumes\r\n",
+      "  rm                       Remove a volume\r\n",
+      "\r\n",
+      "Run 'docker volume COMMAND --help' for more information on a command\r\n",
+      "\r\n",
+      "  --help=false       Print usage\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker help volume"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 237,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "DRIVER              VOLUME NAME\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "docker volume ls"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.4.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}

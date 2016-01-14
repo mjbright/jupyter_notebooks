@@ -1,0 +1,44 @@
+
+chmod 766 /var/run/docker.sock
+
+--------------------------------------------------------------------------------
+
+
+1st launch attempt: Failed because of vm name in Vagrantfile (conflicting with old VM under VBox)
+                    Changed it to correspond
+
+16:00:57 0 mjbright@MJBRIGHT7 ~/src/git/mjbright/jupyter_notebooks/2015-Dec-18-Docker_Demo> vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'ubuntu-trusty64-docker'...
+==> default: Matching MAC address for NAT networking...
+==> default: Setting the name of the VM: 2015-Dec-18-Docker_Demo_default_1450364527533_9164
+==> default: Fixed port collision for 2375 => 2400. Now on port 2200.
+==> default: Fixed port collision for 22 => 2222. Now on port 2201.
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 8888 => 8880 (adapter 1)
+    default: 8878 => 8870 (adapter 1)
+    default: 2375 => 2200 (adapter 1)
+    default: 22 => 2201 (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+A customization command failed:
+
+["modifyvm", :id, "--name", "Vagrant-JupyterDemo", "--memory", "2048"]
+
+The following error was experienced:
+
+#<Vagrant::Errors::VBoxManageError: There was an error while executing `VBoxManage`, a CLI used by Vagrant
+for controlling VirtualBox. The command and stderr is shown below.
+
+Command: ["modifyvm", "a6a404e9-512f-46fb-80d8-65fbf6566eff", "--name", "Vagrant-JupyterDemo", "--memory", "2048"]
+
+Stderr: VBoxManage.exe: error: Could not rename the directory 'E:\VirtualBox\2015-Dec-18-Docker_Demo_default_1450364527533_9164' to 'E:\VirtualBox\Vagrant-JupyterDemo' to save the settings file (VERR_ALREADY_EXISTS)
+VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component SessionMachine, interface IMachine, callee IUnknown
+VBoxManage.exe: error: Context: "SaveSettings()" at line 2788 of file VBoxManageModifyVM.cpp
+>
+
+Please fix this customization and try again.
+
+

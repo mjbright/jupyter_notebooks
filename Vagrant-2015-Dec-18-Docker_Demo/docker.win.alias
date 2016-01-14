@@ -1,0 +1,1 @@
+alias docker='/d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200'

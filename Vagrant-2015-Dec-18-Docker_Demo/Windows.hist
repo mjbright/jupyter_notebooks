@@ -1,0 +1,500 @@
+   36  rm -rf /g/DriveD/\$RECYCLE.BIN/
+   37  rm -rf /g/DriveE.exceptEdu/\$RECYCLE.BIN/
+   38  ll /g/
+   39  df
+   40  ll /g/DriveE.exceptEdu/BACKUPS/
+   41  mv /g/DriveE.exceptEdu/BACKUPS/ /g/
+   42  ll /e/ | less
+   43  ll /d/ | grep Volume
+   44  ll /e/ | grep Volume
+   45  ll /g/DriveD/System\ Volume\ Information/
+   46  rmdir /g/DriveD/System\ Volume\ Information/
+   47  rmdir /g/DriveE.exceptEdu/System\ Volume\ Information/
+   48  ll /d/DATA/SourceCode_PacktPub_LearningIPythonforInteractiveComputingandDataVisualization.zip 
+   49  unzip -l /d/DATA/SourceCode_PacktPub_LearningIPythonforInteractiveComputingandDataVisualization.zip 
+   50  #unzip -l /d/DATA/SourceCode_PacktPub_LearningIPythonforInteractiveComputingandDataVisualization.zip 
+   51  exp /d/DATA/
+   52  rm /d/DATA/SourceCode_PacktPub_LearningIPythonforInteractiveComputingandDataVisualization.zip 
+   53  unzip -l /d/DATA/SourceCode_PacktPub_LearningIPythonforInteractiveComputingandDataVisualization.zip 
+   54  ll /g/DriveE.exceptEdu/
+   55  ll /g/DriveE.exceptEdu/Adobe.Captivate/
+   56  ll /g/DriveE.exceptEdu/Adobe.Captivate/Projects/ETSS_vCPE_FINAL.mp4 
+   57  ll /g/DriveE.exceptEdu/Adobe.Captivate/Projects/ETTS_vCPE_toedit.mp4 
+   58  ll /e/TOSORT/OLD/E/Marcela_JeanClaude/Marce_SDCard2/microSD/Videos/My video clips/Vidéo021.mp4 /g/DriveE.exceptEdu/TOSORT/OLD/E/Marcela_JeanClaude/Marce_SDCard2/microSD/Videos/My video clips/Vidéo021.mp4
+   59  ll /e/TOSORT/OLD/E/Marcela_JeanClaude/Marce_SDCard2/microSD/Videos/My\ video\ clips/Vidéo021.mp4 /g/DriveE.exceptEdu/TOSORT/OLD/E/Marcela_JeanClaude/Marce_SDCard2/microSD/Videos/My\ video\ clips/Vidéo021.mp4
+   60  df
+   61  ll /d/z/bin/Deployed/BACKUP_DriveE_1T.sh 
+   62  mv /d/z/bin/Deployed/BACKUP_DriveE_1T.sh  /d/z/bin/Deployed/BACKUP_LAPTOP_DRIVES.sh
+   63  vi /d/z/bin/Deployed/BACKUP_DriveE_1T.sh  /d/z/bin/Deployed/BACKUP_LAPTOP_DRIVES.sh
+   64  esync
+   65  esync
+   66  esync
+   67  esync
+   68  esync
+   69  esync
+   70  a fehling
+   71  esync
+   72  cd
+   73  ll /e/z/Downloads/Microservices_vs_SOA_NGINX.pdf 
+   74  rm /e/z/Downloads/Microservices_vs_SOA_NGINX.pdf 
+   75  #cd /d/src/git/
+   76  locate futurelearn-dl.py
+   77  ll /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+   78  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+   79  cd /d/src/git/mjbright/futurelearn-dl/
+   80  git status
+   81  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+   82  cp /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+   83  rm futurelearn-dl.py 
+   84  git clone
+   85  git pull
+   86  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+   87  ll
+   88  git pull futurelearn-dl.py
+   89  git co futurelearn-dl.py
+   90  git pull futurelearn-dl.py
+   91  git pull .
+   92  ll
+   93  git status
+   94  git checkout futurelearn-dl.py
+   95  git status
+   96  ll
+   97  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+   98  vi futurelearn-dl.py 
+   99  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+  100  git commit -am "Corrected debug call - had trailing end='' arg"
+  101  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+  102  vi futurelearn-dl.py 
+  103  git commit -am "More affirmative debug message - number of weeks"
+  104  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+  105  cp /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py 
+  106  diff /d/z/bin/DOWNLOADS/FUTURELEARN/futurelearn-dl.py /d/src/git/mjbright/futurelearn-dl/futurelearn-dl.py 
+  107  git status
+  108  git push
+  109  locate mesos
+  110  locate mesos | grep Book_
+  111  ll /E/Education/Books/Containers_Docker_Rocket/Book_OReilly_Building_Applications_on_Mesos.pdf
+  112  locate -i sketchup | grep Book_
+  113  ll /E/Education/Books/Google-Dev/Book_OReilly_Google_SketchUp_Cookbook.pdf
+  114  locate -i docker | grep Book_ | grep -i cookb
+  115  ll /E/Education/Books/Containers_Docker_Rocket/Book_OReilly_Docker_Cookbook.pdf
+  116  a natixis
+  117  grep 13866 ~/z/data/Money/DATA/*
+  118  ll -tr /d/
+  119  rmdir /d/New\ folder*
+  120  mkdir /d/HPE_Jobs
+  121  mv /d/HPSoftware_Openings/ /d/HPE_Jobs/Software_Openings/
+  122  mkdir /d/HPE_Jobs/Geneva_SolnCtr
+  123  mcd
+  124  grep -i salaire *.mon
+  125  grep -i wage *.mon
+  126  grep -i wage *.mon | grep 2015
+  127  vi FR_EU_LaPoste_CJointe.mon 
+  128  grep -i wage *.mon | grep 2015
+  129  grep -i wage *.mon | grep 2015 | sed 's/.*://'
+  130  #grep -i wage *.mon | grep 2015 | sed 's/.*://' | perl -e '
+  131  grep -i wage *.mon | grep 2015 | sed -e 's/.*://' -e ''s/ . ish//' | perl -e 'h
+  132  grep -i wage *.mon | grep 2015 | sed -e 's/.*://' -e ''s/ . ish//' 
+  133  grep -i wage *.mon | grep 2015 | sed -e 's/.*://' -e 's/ . ish//' 
+  134  grep -i wage *.mon | grep 2015 | sed -e 's/.*://' -e 's/ . ish//'  | perl -ne 'if (/(\S+)/) { $TOT += $1; }; END { print $TOT,"\n"; }'
+  135  echo "46360 / 11" | bc
+  136  ./bin/money.sh  -nm
+  137  vi FR_EU_Axa_CA.mon FR_EU_LaPoste_CCP.mon FR_EU_LaPoste_CJointe.mon  FR_EU_LaPoste_LivretA_SA.mon FR_EU_LaPoste_PEL.mon FR_EU_Oney-VISA.mon
+  138  m
+  139  vi FR_EU_Oney-VISA.mon
+  140  grep -i seb FR_EU_Axa_CA.mon
+  141  ll /g/DriveR.exceptEdu/
+  142  ll /g/DriveR.exceptEdu/
+  143  ll -tr /g/DriveR.exceptEdu/
+  144  ll -tr /g/DriveR.exceptEdu/YOUTUBE_NFV/
+  145  ll -tr /g/DriveR.exceptEdu/YOUTUBE_DOWNLOADS/
+  146  ll /g/
+  147  du -s /g/DriveD/
+  148  ll /d/TheDockerBook.pdf 
+  149  locate docker | grep -i the | grep -i book | grep -i pdf
+  150  mv /d/TheDockerBook.pdf /d/Book_JamesTurnbull_TheDockerBook_v1.9.1.pdf
+  151  locate -i jamesturnbull | grep -iv backup
+  152  cp /d/Book_JamesTurnbull_TheDockerBook_v1.9.1.pdf /E/Education/Books/Containers_Docker_Rocket/
+  153  mv /d/Book_JamesTurnbull_TheDockerBook_v1.9.1.pdf /D/z/Dropbox/z/CACHED/DUPLICATES/Docker/
+  154  ll /d/z/CACHED/DUPLICATES/Docker/
+  155  ll /d/z/CACHED/DUPLICATES/Docker/Book_JamesTurnbull_TheDockerBook_v1.6.pdf 
+  156  rm /d/z/CACHED/DUPLICATES/Docker/Book_JamesTurnbull_TheDockerBook_v1.6.pdf 
+  157  ll /d/z/CACHED/DUPLICATES/Docker/Book_JamesTurnbull_TheDockerBook_v1.9.1.pdf 
+  158  open /d/z/CACHED/DUPLICATES/Docker/Book_JamesTurnbull_TheDockerBook_v1.9.1.pdf 
+  159  cd
+  160  ll -tr /d/EBooks.temp/OReilly
+  161  cd /d/EBooks.temp/OReilly
+  162  mv Book_OReillyFree_* /e/Education/Books/Misc/
+  163  mv Book_OReillyFree_* /e/Education/Books/Misc/
+  164  open /e/Education/Books/Misc/Book_OReillyFree_Innovation.pdf 
+  165  ll -tr
+  166  rename 's/^/Book_OReilly_//' *
+  167  ll
+  168  #rename 's/^/Book_OReilly_//' *
+  169  which rename
+  170  /usr/bin/rename 's/^/Book_OReilly_//' *
+  171  ll
+  172  ll /d/z/bin/Deployed/rename
+  173  more /d/z/bin/Deployed/rename
+  174  rename 's/^/Book_OReilly_/' *
+  175  ll
+  176  rename 's/^/Book_OReilly_/' Building_Microservices.pdf  Hadoop_Application_Architectures.pdf  Spidering_Hacks.pdf Docker_Cookbook.pdf 
+  177  ll
+  178  cp Book_OReilly_Docker_Cookbook.* /E/Education/Books/Containers_Docker_Rocket/
+  179  rm /D/z/Dropbox/z/CACHED/DUPLICATES/Docker/Book_OReilly_Docker_Cookbook_RAW.epub
+  180  ll /e/Education/Books/Containers_Docker_Rocket/*RAW*
+  181  rm /e/Education/Books/Containers_Docker_Rocket/*RAW*
+  182  ll /e/Education/Books/Containers_Docker_Rocket/Book_OReilly_Docker_*
+  183  ll
+  184  #mv Book_OReilly_Building_Microservices.
+  185  history
+  186  mv Book_OReilly_Docker_Cookbook.epub /D/z/Dropbox/z/CACHED/DUPLICATES/Docker/
+  187  rm Book_OReilly_Docker_Cookbook.pdf 
+  188  ll
+  189  mv Book_OReilly_Building_Microservices.* /e/Education/Books/Containers_Docker_Rocket/
+  190  ll
+  191  mv Book_OReilly_Spidering_Hacks.* /e/Education/Books/Web/
+  192  mv Book_OReilly_Ruby_Programming_Language.* /e/Education/Books/Programming.Languages/Ruby/
+  193  mv Book_OReilly_Hadoop_Application_Architectures.* /e/Education/Books/Databases/
+  194  mv Book_OReilly_Effective_Modern_Cplusplus.* /e/Education/Books/Programming.Languages/C++/
+  195  ll
+  196  ll
+  197  cd ../
+  198  ll -tr
+  199  ll Books_Leanpub/
+  200  #cd B
+  201  mv OReilly Books_OReilly
+  202  ll Books_OReilly/
+  203  ll Books_Leanpub/
+  204  cd Books_Leanpub/
+  205  mv Book_Leanpub_ExploringDataAnalysisWithR.* Book_LeanPub_LittleInferenceBook.* Book_Leanpub_RogerDPeng_TheArtOfDataScience.* /e/Education/Books/Analytics/
+  206  ll
+  207  mv Book_Leanpub_software-architecture-for-developers.pdf /E/Education/Books/Programming.Languages/ProgrammingPractices/Book_LeanPub_software-architecture-for-developers_SimonBrown.pdf
+  208  mv Book_Leanpub_software-architecture-for-developers.epub /E/Education/Books/Programming.Languages/ProgrammingPractices/Book_LeanPub_software-architecture-for-developers_SimonBrown.epub 
+  209  ll
+  210  mv Book_Leanpub_ReportWriting.* /e/Education/Books/Misc/
+  211  mv Book_Leanpub_theneophytesguidetoscala.pdf /e/Education/Books/Programming.Languages/Java-Scala/Book_Leanpub_TheNeophytesGuideToScala.pdf
+  212  mv Book_Leanpub_theneophytesguidetoscala.epub /e/Education/Books/Programming.Languages/Java-Scala/Book_Leanpub_TheNeophytesGuideToScala.epub 
+  213  ll
+  214  cd ../
+  215  ll -tr
+  216  #ll *MEEAP
+  217  #ll Man
+  218  mkdir Books_Manning
+  219  mv *MEAP* Books_Manning
+  220  cd Books_Manning/
+  221  ll
+  222  ll
+  223  mv ../PacktPub/ ../Books_PacktPub
+  224  mkdir ../HPE
+  225  mv ../HP* ../HPE* ../HPE/
+  226  mv ../HP* ../HPE* ../HPE/
+  227  ll -tr ../ | grep HP
+  228  ll ../HPE_BehaviouralAgility/
+  229  ll ../HP/
+  230  ll -tr ../
+  231  ll /d/z/CACHED/GOODREAD/MEAN/Book_Manning_Getting_MEAN_with_Mo_v12_MEAP.epub 
+  232  ll /d/z/Mobile/Books/Book_Getting_MEAN_v1*
+  233  mv ../Getting_MEAN_with_Mo.pdf /d/z/Mobile/Books/Book_Manning_Getting_MEAN_withMongoExpressAngularNode_MEAP_FINAL.pdf
+  234  mv /d/z/Mobile/Books/Book_Manning_Getting_MEAN_withMongoExpressAngularNode_MEAP_FINAL.pdf /e/Education/Books/Programming.Languages/Javascript/
+  235  open /e/Education/Books/Programming.Languages/Javascript/Book_Manning_Getting_MEAN_withMongoExpressAngularNode_MEAP_FINAL.pdf 
+  236  ll /d/z/Mobile/Books/
+  237  ll /d/z/Mobile/Books/Book_Getting_MEAN_v1*
+  238  rm /d/z/Mobile/Books/Book_Getting_MEAN_v10*
+  239  mv /d/z/Mobile/Books/Book_Getting_MEAN_v11_withMongoExpressAngularNode_MEAP.* .
+  240  ll
+  241  rename 's/Book_G/Book_Manning_G/' Book_Getting_MEAN_v11_withMongoExpressAngularNode_MEAP.*
+  242  ll
+  243  #mv 
+  244  mv Book_Manning_Getting_MEAN_v11_withMongoExpressAngularNode_MEAP.* /d/z/Mobile/Books/Book_Manning_Getting_MEAN_withMongoExpressAngularNode_MEAP_FINAL.pdf /e/Education/Books/Programming.Languages/Javascript/
+  245  ll /e//Education/Books/Programming.Languages/Javascript/
+  246  ll /e//Education/Books/Programming.Languages/Javascript/Book_Manning_*
+  247  ll -tr /e//Education/Books/Programming.Languages/Javascript/Book_Manning_*
+  248  ll
+  249  rename 's/^/Book_Manning_/' *
+  250  ll
+  251  #mv Bo
+  252  mv Book_Manning_Angular_2_in_Action_v1_MEAP.* Book_Manning_Getting_MEAN_v11_withMongoExpressAngularNode_MEAP.* /d/z/Mobile/Books/Book_Manning_Getting_MEAN_withMongoExpressAngularNode_MEAP_FINAL.pdf /e/Education/Books/Programming.Languages/Javascript/
+  253  ll
+  254  rm /d/z/CACHED/OpenStack/Docs/Book_Manning_OpenStack_in_Action_v13_MEAP.*
+  255  cp Book_Manning_OpenStack_in_Action_v14_MEAP.* /d/z/CACHED/OpenStack/Docs/
+  256  #cp Book_Manning_OpenStack_in_Action_v14_MEAP.* /d/z/CACHED/OpenStack/Docs/
+  257  rm /d/z/Mobile/Books/Book_Manning_OpenStack_in_Action_v*
+  258  mv Book_Manning_OpenStack_in_Action_v14_MEAP.* /e/Education/Books/CloudComputing/OpenStack/
+  259  ll
+  260  ll ../Book*
+  261  ll -d ../Book*
+  262  ll ../Book*/*
+  263  ll
+  264  cd ../
+  265  ll
+  266  #ll
+  267  rm TheDockerBook_v180.pdf 
+  268  rm /e/z/Downloads/TheDockerBook*
+  269  rm /e/z/Downloads/*.torrent
+  270  ll Books_OReilly/
+  271  mv Books_OReilly/* /e/Education/Books/Containers_Docker_Rocket/
+  272  open /e/Education/Books/Containers_Docker_Rocket/Book_OReillyFree_containers-and-docker-ecosystem-2015.pdf 
+  273  ll
+  274  ll Magazines
+  275  mkdir Magazines
+  276  mv Mag* Magazines/
+  277  mv Linux-* sdtimes3* Magazines/
+  278  ls
+  279  mkdir Pao
+  280  mv MethodeMeer/ Paulina\ Gutierrez_Mémoire_Relations\ intergénérationnelles* Pao/
+  281  ls
+  282  mv VNFDemo.wmv  HPE/
+  283  ll HPE/VNFDemo.wmv 
+  284  mkdir Webinars
+  285  mv Webinar-__A_in-depth_technical_look_at_OpenShift_Enterprise_3.1.pdf OpenShiftV3LabMaterialsforDevelopers.pdf  OReilly_Webinar_restapis.pdf Webinars/
+  286  mv Webinar-__A_in-depth_technical_look_at_OpenShift_Enterprise_3.1.pdf OpenShiftV3LabMaterialsforDevelopers.pdf  OReilly_Webinar_restapis.pdf Webinars/
+  287  ll Webinars/
+  288  open Webinars/Webinar-__A_in-depth_technical_look_at_OpenShift_Enterprise_3.1.pdf 
+  289  ls
+  290  ll REMY_COURSES/
+  291  ll NET_CONFIGS/
+  292  mv Mirantis\ and\ MetaSwitch\ -\ NFV\ Webcast\ Presentation.pdf  Webinars/
+  293  mv Slides_FreeElectrons_petazzoni-device-tree-dummies.pdf  Webinars/
+  294  ls
+  295  mv LWN\ net\ Weekly\ Edition\ for\ * Magazines/
+  296  ls
+  297  mb InfoQ_Description_Discovery_and_Profiles-The_Next_Level_in_Web_APIs_emag.pdf  Intel_RedHat_Cyan_Brocade_EndtoEndNFVArchitectureFinal.pdf Webinars/
+  298  mv InfoQ_Description_Discovery_and_Profiles-The_Next_Level_in_Web_APIs_emag.pdf  Intel_RedHat_Cyan_Brocade_EndtoEndNFVArchitectureFinal.pdf Webinars/
+  299  ls
+  300  ll NFVBU_Webinar/
+  301  ll NFV
+  302  mv NFV* HPE/
+  303  ls
+  304  ll Networking/
+  305  ls
+  306  ls | less
+  307  ll ApacheMesos/
+  308  rmdir ApacheMesos/
+  309  #ls | less
+  310  mv Book_TheNewStack_TheDockerAndContainerEcosystem.pdf  /e/Education/Books/Containers_Docker_Rocket/
+  311  mv Book_FutureLearn_the-crowdsourced-guide-to-learning.* /e/Education/Books/Misc/
+  312  ls
+  313  mv HPE_BehaviouralAgility/ HPE/
+  314  ll HP
+  315  mv HP HPE/
+  316  ls
+  317  ll *Modu*
+  318  #mv *Modu* /e/Education/Books/Web/
+  319  ll /e/Education/Books/Web/ | grep -i apache
+  320  mkdir /e/Education/Books/Web/Apache
+  321  mv *Modu* /e/Education/Books/Web/Apache/
+  322  mv /e/Education/Books/Web/*Apache* /e/Education/Books/Web/Apache/
+  323  ll /e/Education/Books/Web/Apache
+  324  ls
+  325  rm Freemobile_0645143654_22-09-2015.pdf 
+  326  mv FCM_issue100_e* Magazines/
+  327  open Magazines/FCM_issue100_es.pdf 
+  328  ll /d/z/CACHED/GOODREAD/Spanish/
+  329  open Magazines/FCM_issue100_es.pdf 
+  330  cp Magazines/FCM_issue100_es.pdf  /d/z/CACHED/GOODREAD/Spanish/
+  331  ll
+  332  mv *upy* JUPYTER/
+  333  ll
+  334  mv Essentials_Bash_v1.pdf  /e/Education/Books/Linux/
+  335  ls
+  336  ll *BE*
+  337  #mv *BE* Magazines/
+  338  mkdir Magazines/ABE
+  339  mv *BE* Magazines/ABE/
+  340  mcd
+  341  vi FR_EU_Axa_CA.mon
+  342  grep -i pbell /d/.ssh/known_hosts
+  343  #vi /d
+  344  cd
+  345  ll -tr EBooks.temp/Books_PacktPub/
+  346  locate Blender
+  347  locatei -i  Blender
+  348  locatei-i  Blende
+  349  locfis atei-i  Blende
+  350  locate -i  Blende
+  351  locate -i  Blende |grep -i pdf
+  352  locate -i  jenkins |grep -i pd
+  353  ll -tr /e/Education/Books/Integration/
+  354  locate -i  kali |grep -i pd
+  355  ll -tr EBooks.temp/Books_PacktPub/
+  356  cksum EBooks.temp/Books_PacktPub/Raspberry\ Pi\ Networking\ Cookbook\ \[eBook\].*
+  357  rm EBooks.temp/Books_PacktPub/Raspberry\ Pi\ Networking\ Cookbook\ \[eBook\].*
+  358  d 
+  359  locate -i blender | grep -i game
+  360  ll /e/Education/Books/Programming.Languages/R/
+  361  locate -i book_ | grep -i eclipse
+  362  locate -i book_ | grep -i apache
+  363  locate -i book_ | grep -i sketch
+  364  locate -i book_ | grep -i studio
+  365  locate -i book_ | grep -i studio | grep -i visual
+  366  locate -i book_ | grep -i webgl
+  367  locate -i book_ | grep -i haskell
+  368  locate -i book_ | grep -i opengl
+  369  locate -i book_ | grep -i games
+  370  locate -i book_ | grep -i eclipse
+  371  locate -i book_ | grep -i rasp
+  372  locate -i book_ | grep -i powershell
+  373  locate -i book_ | grep -i secur
+  374  locate -i book_ | grep -i webgl
+  375  mkdir /e/Education/Books/Programming.Languages/F#
+  376  #~/z/bin/Deployed/wa
+  377  b10wait 
+  378  mcd
+  379  grep -i vivaccio *.mon
+  380  grep -i vivacio *.mon
+  381  grep -i viva *.mon
+  382  grep -i vivva *.mon
+  383  grep -i vie FR_EU_Axa_CA.mon
+  384  vi FR_EU_Axa_CA.mon
+  385  grep -i vivva *.mon
+  386  grep -i viva *.mon
+  387  cd /d/src/git/MOOCS/
+  388  ll Edx/
+  389  cd Edx/
+  390  git clone https://github.com/MicrosoftLearning/Bootstrap-edX
+  391  ll Bootstrap-edX/
+  392  find Bootstrap-edX/
+  393  find Bootstrap-edX/ | less
+  394  exp Bootstrap-edX/
+  395  ll Bootstrap-edX/Demos
+  396  ll Bootstrap-edX/
+  397  ll Bootstrap-edX/edx\ Demos/
+  398  #ll Bootstrap-edX/edx\ Demos/
+  399  cd -
+  400  cd
+  401  cd \$OLDPWD/edx\ Demos/
+  402  ll
+  403  cd $OLDPWD/edx\ Demos/
+  404  ll
+  405  ll ModuleOne/
+  406  ll ModuleTwo
+  407  ll ModuleTwo
+  408  grep -i bootstrap ModuleTwo/*.html
+  409  ll ../
+  410  ll ModuleOne/
+  411  ll ModuleOne/css/
+  412  cp -a ModuleOne/css/ ModuleTwo/Content
+  413  grep -i family ModuleTwo/Index_Accordion.html 
+  414  ll Module
+  415  ll ModuleTwo
+  416  ll ModuleTwo/Scripts/
+  417  ll ModuleOne/Scripts/
+  418  cp ModuleOne/Scripts/*.js ModuleTwo/Scripts/
+  419  more ModuleTwo/Index.html 
+  420  ll ModuleTwo/Scripts/jquery-2.1.1.intellisense.js 
+  421  find . -iname 'jquery*.js'
+  422  cp /d/z/data/Money/2016-Jan-Pret-Maison/2015-12-Maison_CalculationPret.xlsx /d/z/Dropbox/Shares/Pao/Administration\ commune/Maison/2015-12-Maison_CalculationPret.xlsx 
+  423  cd ../
+  424  git status
+  425  b10wait 
+  426  sshb10cpq
+  427  b10cpq
+  428  b10dcpq 
+  429  b10d
+  430  ssh b10cpq
+  431  locate MEAP
+  432  locate MEAP | grep -i angular
+  433  locate MEAP | grep -i angular
+  434  clear; locate MEAP | grep -i angular | grep -v MEAN
+  435  ##cp Book_Manning_OpenStack_in_Action_v14_MEAP.* /d/z/CACHED/OpenStack/Docs/
+  436  df
+  437  git remote 
+  438  git remote  -v
+  439  ll
+  440  rm -rf *
+  441  git clone https://github.com/MicrosoftLearning/Bootstrap-edX .
+  442  git pulll
+  443  git pull
+  444  ll
+  445  git checkout
+  446  ll
+  447  git checkout
+  448  git revert
+  449  git remote -v
+  450  rm -rf .git*
+  451  ll
+  452  git clone https://github.com/mjbright/Bootstrap-edX .
+  453  cd ../
+  454  mv Bootstrap-edX/ mjbright.Bootstrap-edX/
+  455  cd mjbright.Bootstrap-edX/
+  456  ll
+  457  cd Resources/
+  458  pwd
+  459  cd ../edx\ Demos/ModuleOne/
+  460  cksum Index*
+  461  cat ~/z/bin/Deployed/python_web_server.sh 
+  462  cd ../
+  463  ~/z/bin/Deployed/python_web_server.sh 
+  464  cd
+  465  ssh b10cpq
+  466  ssh b10cpq
+  467  ssh b10cpq
+  468  cd
+  469  ll /d/.ssh/id_dsa.pub 
+  470  cat /d/.ssh/id_rsa.pub 
+  471  ssh root@192.168.216.11 uptime
+  472  ssh nfv@192.168.216.10 uptime
+  473  ssh nfv@192.168.216.10 uptime
+  474  ssh root@192.168.216.11 uptime
+  475  ssh root@192.168.216.11 uptime
+  476  esync
+  477  cd
+  478  ssh b10cpq
+  479  history
+  480  ssh root@192.168.216.12
+  481  ssh root@192.168.216.12
+  482  #ssh nfv@192.168.216.12
+  483  ssh root@192.168.216.11
+  484  ssh nfv@192.168.216.10
+  485  ping 192.168.216.1
+  486  ping 192.168.216.10
+  487  uptime
+  488  exit
+  489  cd
+  490  cd
+  491  cd
+  492  cd
+  493  ssh admin@a
+  494  ssh-copy-id root@a
+  495  ssh root@a
+  496  cd
+  497  ssh admin@b
+  498  ssh-copy-id root@b
+  499  #ssh-copy-id root@b
+  500  ssh root@b
+  501  cd
+  502  /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://12 7.0.0.1:2200 ps
+  503  /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 ps
+  504  /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 ps
+  505  /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 ps
+  506  clear; /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 ps
+  507  clear; /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 ps -a
+  508  docker version
+  509  clear; /d/z/bin/DOCKER/win64/docker-1.9.1.exe version
+  510  clear; /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 ps -a
+  511  /d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200 version
+  512  docker run hello-world
+  513  alias docker='/d/z/bin/DOCKER/win64/docker-1.9.1.exe -H tcp://127.0.0.1:2200'
+  514  docker ps
+  515  docker version
+  516  docker run hello-world
+  517  docker rmi hello-world
+  518  docker ps -a
+  519  docker ps -aql
+  520  docker stop $(docker ps -aql)
+  521  docker stop $(docker ps -aql)
+  522  docker ps -a
+  523  docker rm $(docker ps -aql)
+  524  docker ps -a
+  525  docker ps -aq
+  526  docker ps -aql
+  527  docker stop $(docker ps -aql)
+  528  docker rm $(docker ps -aql)
+  529  docker rmi hello-world
+  530  docker run hello-world
+  531  pwd
+  532  cd /d/src/git/mjbright/jupyter_notebooks/Vagrant-2015-Dec-18-Docker_Demo/
+  533  ll
+  534  alias
+  535  history > Windows.hist
