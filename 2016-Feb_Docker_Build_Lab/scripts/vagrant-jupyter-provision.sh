@@ -83,5 +83,6 @@ ln -s /vagrant/scripts/start_NATIVE_jupyter.sh ./jupyter.sh
 ########################################
 # Install pandoc/latex tools for PDF printing of notebooks:
 
-apt-get install -y pandoc linuxdoc-tools-latex
+# Disabled as long to run, problematic - best to just print to PDF from host
+# apt-get install -y pandoc linuxdoc-tools-latex
 
