@@ -8,8 +8,9 @@ You should be able to run this lab in most Linux environments which already have
 - Docker clients installed
 - Git installed
 
-For the *'February 2016 Docker Build Lab'* you do not need to **(must not)**
-follow the below installation procedure.
+For the **'February 2016 Docker Build Lab'**
+- **refer to the PDF instructions [here](https://raw.githubusercontent.com/mjbright/jupyter_notebooks/master/2016-Feb_Docker_Build_Lab/2016-Feb_Docker_Build_Lab.pdf) (http://bit.ly/1QF0XaH)**
+- you do not need to **(must not)** follow the below installation procedure.
 
 Installation of this lab environment (optional)
 ============
