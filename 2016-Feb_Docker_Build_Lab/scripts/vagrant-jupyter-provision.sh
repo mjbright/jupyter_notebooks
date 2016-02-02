@@ -75,6 +75,12 @@ conda remove -y pexpect
 pip install pexpect
 
 
+########################################
+# Setup handy link to jupyter start script:
+
+ln -s /vagrant/scripts/start_NATIVE_jupyter.sh ./jupyter.sh
+
+
 
 
 
