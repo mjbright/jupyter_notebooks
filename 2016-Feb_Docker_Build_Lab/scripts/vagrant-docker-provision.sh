@@ -10,6 +10,8 @@ MACHINE_RC_URL=https://github.com/docker/machine/releases/download/$MACHINE_RC/d
 COMPOSE_RC=1.6.0-rc2
 COMPOSE_RC_URL=https://github.com/docker/compose/releases/download/$COMPOSE_RC/docker-compose-`uname -s`-`uname -m`
 
+SWARM_RC=1.1.0-rc2
+
 ################################################################################
 # Functions:
 die() {
@@ -77,5 +79,8 @@ sudo chmod +x /usr/local/bin/docker-machine
 curl -L $COMPOSE_RC_URL | sudo tee /usr/local/bin/docker-compose >/dev/null
 sudo chmod +x /usr/local/bin/docker-compose
 
-
+#
+# Install (pull) Docker swarm:
+#
+docker pull swarm:$SWARM_RC
 
