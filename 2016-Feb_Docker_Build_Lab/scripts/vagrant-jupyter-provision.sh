@@ -80,7 +80,8 @@ pip install pexpect
 
 ln -s /vagrant/scripts/start_NATIVE_jupyter.sh ./jupyter.sh
 
+########################################
+# Install pandoc/latex tools for PDF printing of notebooks:
 
-
-
+apt-get install -y pandoc linuxdoc-tools-latex
 
