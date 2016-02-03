@@ -2,3 +2,7 @@
 .vagrant/
 *.exe
 src/
+src.bak/
+*.swp
+*.bak
+*.old
