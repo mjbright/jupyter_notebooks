@@ -3,14 +3,17 @@
 # Default: testing (release candidates):
 [ -z "$1" ] && set -- -RC
 
-MACHINE_RC=v0.6.0-rc2
+#MACHINE_RC=v0.6.0-rc2
+MACHINE_RC=v0.6.0
 MACHINE_RC_URL=https://github.com/docker/machine/releases/download/$MACHINE_RC/docker-machine-`uname -s`-`uname -m`
 
 
-COMPOSE_RC=1.6.0-rc2
+#COMPOSE_RC=1.6.0-rc2
+COMPOSE_RC=1.6.0
 COMPOSE_RC_URL=https://github.com/docker/compose/releases/download/$COMPOSE_RC/docker-compose-`uname -s`-`uname -m`
 
-SWARM_RC=1.1.0-rc2
+#SWARM_RC=1.1.0-rc2
+SWARM_RC=1.1.0
 
 ################################################################################
 # Functions:

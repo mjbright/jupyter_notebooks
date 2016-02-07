@@ -26,7 +26,7 @@ die() {
 echo "Updating apt packages ..."
 #sudo apt-get -y update
 id
-apt-get update
+sudo apt-get update
 echo "... done"
 
 #sudo apt-get -y -q upgrade
@@ -49,7 +49,7 @@ chmod a+x Anaconda3_installer.sh
 ./Anaconda3_installer.sh -b -p ~/anaconda3
 
 { echo;
-  echo "# Add anaconda3 to PATH:
+  echo "# Add anaconda3 to PATH:"
   echo "export PATH=~/anaconda3/bin:\$PATH";
   echo;
 } >> .bashrc
